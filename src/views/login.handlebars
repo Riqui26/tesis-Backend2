@@ -1,0 +1,45 @@
+<!-- views/login.handlebars -->
+<h1>Iniciar Sesión</h1>
+<form id="loginForm">
+  <div>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+  </div>
+  <div>
+    <label for="password">Contraseña:</label>
+    <input type="password" id="password" name="password" required>
+  </div>
+  <button type="submit">Iniciar Sesión</button>
+</form>
+<p>¿No tienes una cuenta? <a href="/register">Regístrate</a></p>
+
+<script>
+  document.getElementById('loginForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    
+    try {
+      const response = await fetch('/api/sessions/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, password }),
+        credentials: 'include'
+      });
+      
+      const result = await response.json();
+      
+      if (response.ok) {
+        window.location.href = '/profile';
+      } else {
+        alert(result.message || 'Error al iniciar sesión');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Error al iniciar sesión');
+    }
+  });
+</script>
