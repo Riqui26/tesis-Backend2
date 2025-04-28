@@ -1,8 +1,7 @@
-// models.Ticket.js
+// models/Ticket.js (corregido)
 import mongoose from "mongoose";
-import { Schema, model } from "mongoose";
 
-const ticketSchema = new Schema({
+const ticketSchema = new mongoose.Schema({
     code: {
         type: String,
         required: true,
@@ -23,4 +22,5 @@ const ticketSchema = new Schema({
     },
 });
 
-export const TicketModel = mongoose.model('Ticket', ticketSchema);
+// Exportamos como ticketModel (en minúscula) para que coincida con la importación
+export const ticketModel = mongoose.model('Ticket', ticketSchema);

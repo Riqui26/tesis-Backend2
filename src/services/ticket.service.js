@@ -1,5 +1,4 @@
 // services/ticket.service.js
-
 import { ticketModel } from '../models/Ticket.js';
 
 class TicketService {
